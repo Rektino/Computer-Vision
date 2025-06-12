@@ -1,0 +1,3 @@
+/home/geo/ros2_ws/CV_projects/build/CMakeFiles/StereoVisionProject.dir
+/home/geo/ros2_ws/CV_projects/build/CMakeFiles/edit_cache.dir
+/home/geo/ros2_ws/CV_projects/build/CMakeFiles/rebuild_cache.dir
