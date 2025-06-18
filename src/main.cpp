@@ -1,4 +1,4 @@
-#include "DisparityMapGenerator.h"
+#include "DisparityMapGenerator.hpp"
 using namespace cv  ;
 
 int main(int argc , char** argv) { 

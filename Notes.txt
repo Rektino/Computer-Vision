@@ -1,0 +1,14 @@
+int chessBoardFlags = CALIB_CB_ADAPTIVE_THRESH | CALIB_CB_NORMALIZE_IMAGE;
+
+found = findChessboardCorners( view, s.boardSize, pointBuf, chessBoardFlags);
+
+cvtColor(view, viewGray, COLOR_BGR2GRAY);
+
+cornerSubPix( viewGray, pointBuf, Size(winSize,winSize),
+    Size(-1,-1), TermCriteria( TermCriteria::EPS+TermCriteria::COUNT, 30, 0.0001 ));
+
+drawChessboardCorners( view, cv::Size(s.boardSize.width-1, s.boardSize.height-1), Mat(pointBuf), found );
+
+rms = calibrateCameraRO(objectPoints, imagePoints, imageSize, iFixedPoint,
+                                cameraMatrix, distCoeffs, rvecs, tvecs, newObjPoints,
+                                s.flag | CALIB_USE_LU);

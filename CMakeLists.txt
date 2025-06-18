@@ -25,7 +25,12 @@ message(STATUS "OpenCV libraries: ${OpenCV_LIBS}")
 # Add an executable target for your project
 # This assumes your main source file is main.cpp
 add_executable(${PROJECT_NAME} src/main.cpp
-        include/DisparityMapGenerator.h)
+        include/DisparityMapGenerator.hpp
+        include/CameraParameters.hpp
+        src/DisparityMapGenerator.cpp
+        src/CameraCalibrator.cpp
+        include/CameraCalibrator.hpp
+)
 
 # Link the executable with OpenCV libraries
 # This ensures your program can use OpenCV functions
