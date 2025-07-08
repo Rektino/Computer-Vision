@@ -129,6 +129,54 @@ StereoVisionProject/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/StereoVisionProject.dir/build.make CMakeFiles/StereoVisionProject.dir/build
 .PHONY : StereoVisionProject/fast
 
+src/CameraCalibrator.o: src/CameraCalibrator.cpp.o
+.PHONY : src/CameraCalibrator.o
+
+# target to build an object file
+src/CameraCalibrator.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StereoVisionProject.dir/build.make CMakeFiles/StereoVisionProject.dir/src/CameraCalibrator.cpp.o
+.PHONY : src/CameraCalibrator.cpp.o
+
+src/CameraCalibrator.i: src/CameraCalibrator.cpp.i
+.PHONY : src/CameraCalibrator.i
+
+# target to preprocess a source file
+src/CameraCalibrator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StereoVisionProject.dir/build.make CMakeFiles/StereoVisionProject.dir/src/CameraCalibrator.cpp.i
+.PHONY : src/CameraCalibrator.cpp.i
+
+src/CameraCalibrator.s: src/CameraCalibrator.cpp.s
+.PHONY : src/CameraCalibrator.s
+
+# target to generate assembly for a file
+src/CameraCalibrator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StereoVisionProject.dir/build.make CMakeFiles/StereoVisionProject.dir/src/CameraCalibrator.cpp.s
+.PHONY : src/CameraCalibrator.cpp.s
+
+src/DisparityMapGenerator.o: src/DisparityMapGenerator.cpp.o
+.PHONY : src/DisparityMapGenerator.o
+
+# target to build an object file
+src/DisparityMapGenerator.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StereoVisionProject.dir/build.make CMakeFiles/StereoVisionProject.dir/src/DisparityMapGenerator.cpp.o
+.PHONY : src/DisparityMapGenerator.cpp.o
+
+src/DisparityMapGenerator.i: src/DisparityMapGenerator.cpp.i
+.PHONY : src/DisparityMapGenerator.i
+
+# target to preprocess a source file
+src/DisparityMapGenerator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StereoVisionProject.dir/build.make CMakeFiles/StereoVisionProject.dir/src/DisparityMapGenerator.cpp.i
+.PHONY : src/DisparityMapGenerator.cpp.i
+
+src/DisparityMapGenerator.s: src/DisparityMapGenerator.cpp.s
+.PHONY : src/DisparityMapGenerator.s
+
+# target to generate assembly for a file
+src/DisparityMapGenerator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StereoVisionProject.dir/build.make CMakeFiles/StereoVisionProject.dir/src/DisparityMapGenerator.cpp.s
+.PHONY : src/DisparityMapGenerator.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -162,6 +210,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... StereoVisionProject"
+	@echo "... src/CameraCalibrator.o"
+	@echo "... src/CameraCalibrator.i"
+	@echo "... src/CameraCalibrator.s"
+	@echo "... src/DisparityMapGenerator.o"
+	@echo "... src/DisparityMapGenerator.i"
+	@echo "... src/DisparityMapGenerator.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

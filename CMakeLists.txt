@@ -9,7 +9,8 @@ project(StereoVisionProject CXX)
 # Find OpenCV package
 # You might need to set OpenCV_DIR environment variable if CMake can't find it automatically.
 # Example: export OpenCV_DIR=/path/to/your/opencv/build
-set(OpenCV_DIR "C:/Program Files/opencv/build/x64/vc16/lib")
+# set(OpenCV_DIR "C:/Program Files/opencv/build/x64/vc16/lib")
+
 find_package(OpenCV REQUIRED)
 
 # Check if OpenCV was found. If not, print an error and exit.
@@ -37,11 +38,13 @@ add_executable(${PROJECT_NAME} src/main.cpp
 target_link_libraries(${PROJECT_NAME} PRIVATE ${OpenCV_LIBS})
 
 # Add OpenCV include directories so your compiler can find OpenCV headers
-target_include_directories(${PROJECT_NAME} PRIVATE ${OpenCV_INCLUDE_DIRS} include)
-
+target_include_directories(${PROJECT_NAME} PRIVATE 
+    ${OpenCV_INCLUDE_DIRS}
+    include
+)
 # Optional: Set C++ standard (e.g., C++14 or C++17)
 # Using a modern C++ standard is good practice
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 23)
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD_REQUIRED ON)
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_EXTENSIONS OFF)
 

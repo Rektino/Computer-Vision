@@ -1,9 +1,14 @@
+#include "CameraCalibrator.hpp"
+#include "CameraParameters.hpp"
 #include "DisparityMapGenerator.hpp"
-using namespace cv  ;
+using namespace cv;
 
-int main(int argc , char** argv) { 
-	std::cout << "Hello from CV main file" << "\n" ;
-
-	return 0 ; 
-
-} 
+int main(int argc, char **argv) {
+  std::cout << "Hello from CV main file" << "\n";
+  std::vector<std::string> filenamesForCalibration =
+      generateFilenames("cam", 0, 1, 1, "_image", 1500, 1600, 4, ".bmp");
+  for (auto &file : filenamesForCalibration) {
+    std::cout << file << std::endl;
+  }
+  return 0;
+}

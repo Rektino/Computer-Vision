@@ -1,8 +1,20 @@
 [
 {
   "directory": "/home/geo/ros2_ws/CV_projects/build",
-  "command": "/usr/bin/c++  -I/home/geo/ros2_ws/CV_projects/include -isystem /usr/include/opencv4 -std=c++20 -o CMakeFiles/StereoVisionProject.dir/src/main.cpp.o -c /home/geo/ros2_ws/CV_projects/src/main.cpp",
+  "command": "/usr/bin/c++  -I/home/geo/ros2_ws/CV_projects/include -isystem /usr/include/opencv4 -std=c++23 -o CMakeFiles/StereoVisionProject.dir/src/main.cpp.o -c /home/geo/ros2_ws/CV_projects/src/main.cpp",
   "file": "/home/geo/ros2_ws/CV_projects/src/main.cpp",
   "output": "CMakeFiles/StereoVisionProject.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/geo/ros2_ws/CV_projects/build",
+  "command": "/usr/bin/c++  -I/home/geo/ros2_ws/CV_projects/include -isystem /usr/include/opencv4 -std=c++23 -o CMakeFiles/StereoVisionProject.dir/src/DisparityMapGenerator.cpp.o -c /home/geo/ros2_ws/CV_projects/src/DisparityMapGenerator.cpp",
+  "file": "/home/geo/ros2_ws/CV_projects/src/DisparityMapGenerator.cpp",
+  "output": "CMakeFiles/StereoVisionProject.dir/src/DisparityMapGenerator.cpp.o"
+},
+{
+  "directory": "/home/geo/ros2_ws/CV_projects/build",
+  "command": "/usr/bin/c++  -I/home/geo/ros2_ws/CV_projects/include -isystem /usr/include/opencv4 -std=c++23 -o CMakeFiles/StereoVisionProject.dir/src/CameraCalibrator.cpp.o -c /home/geo/ros2_ws/CV_projects/src/CameraCalibrator.cpp",
+  "file": "/home/geo/ros2_ws/CV_projects/src/CameraCalibrator.cpp",
+  "output": "CMakeFiles/StereoVisionProject.dir/src/CameraCalibrator.cpp.o"
 }
 ]

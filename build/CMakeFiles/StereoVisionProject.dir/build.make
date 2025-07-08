@@ -83,14 +83,46 @@ CMakeFiles/StereoVisionProject.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/StereoVisionProject.dir/src/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/geo/ros2_ws/CV_projects/src/main.cpp -o CMakeFiles/StereoVisionProject.dir/src/main.cpp.s
 
+CMakeFiles/StereoVisionProject.dir/src/DisparityMapGenerator.cpp.o: CMakeFiles/StereoVisionProject.dir/flags.make
+CMakeFiles/StereoVisionProject.dir/src/DisparityMapGenerator.cpp.o: /home/geo/ros2_ws/CV_projects/src/DisparityMapGenerator.cpp
+CMakeFiles/StereoVisionProject.dir/src/DisparityMapGenerator.cpp.o: CMakeFiles/StereoVisionProject.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/geo/ros2_ws/CV_projects/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/StereoVisionProject.dir/src/DisparityMapGenerator.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/StereoVisionProject.dir/src/DisparityMapGenerator.cpp.o -MF CMakeFiles/StereoVisionProject.dir/src/DisparityMapGenerator.cpp.o.d -o CMakeFiles/StereoVisionProject.dir/src/DisparityMapGenerator.cpp.o -c /home/geo/ros2_ws/CV_projects/src/DisparityMapGenerator.cpp
+
+CMakeFiles/StereoVisionProject.dir/src/DisparityMapGenerator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/StereoVisionProject.dir/src/DisparityMapGenerator.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/geo/ros2_ws/CV_projects/src/DisparityMapGenerator.cpp > CMakeFiles/StereoVisionProject.dir/src/DisparityMapGenerator.cpp.i
+
+CMakeFiles/StereoVisionProject.dir/src/DisparityMapGenerator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/StereoVisionProject.dir/src/DisparityMapGenerator.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/geo/ros2_ws/CV_projects/src/DisparityMapGenerator.cpp -o CMakeFiles/StereoVisionProject.dir/src/DisparityMapGenerator.cpp.s
+
+CMakeFiles/StereoVisionProject.dir/src/CameraCalibrator.cpp.o: CMakeFiles/StereoVisionProject.dir/flags.make
+CMakeFiles/StereoVisionProject.dir/src/CameraCalibrator.cpp.o: /home/geo/ros2_ws/CV_projects/src/CameraCalibrator.cpp
+CMakeFiles/StereoVisionProject.dir/src/CameraCalibrator.cpp.o: CMakeFiles/StereoVisionProject.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/geo/ros2_ws/CV_projects/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/StereoVisionProject.dir/src/CameraCalibrator.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/StereoVisionProject.dir/src/CameraCalibrator.cpp.o -MF CMakeFiles/StereoVisionProject.dir/src/CameraCalibrator.cpp.o.d -o CMakeFiles/StereoVisionProject.dir/src/CameraCalibrator.cpp.o -c /home/geo/ros2_ws/CV_projects/src/CameraCalibrator.cpp
+
+CMakeFiles/StereoVisionProject.dir/src/CameraCalibrator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/StereoVisionProject.dir/src/CameraCalibrator.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/geo/ros2_ws/CV_projects/src/CameraCalibrator.cpp > CMakeFiles/StereoVisionProject.dir/src/CameraCalibrator.cpp.i
+
+CMakeFiles/StereoVisionProject.dir/src/CameraCalibrator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/StereoVisionProject.dir/src/CameraCalibrator.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/geo/ros2_ws/CV_projects/src/CameraCalibrator.cpp -o CMakeFiles/StereoVisionProject.dir/src/CameraCalibrator.cpp.s
+
 # Object files for target StereoVisionProject
 StereoVisionProject_OBJECTS = \
-"CMakeFiles/StereoVisionProject.dir/src/main.cpp.o"
+"CMakeFiles/StereoVisionProject.dir/src/main.cpp.o" \
+"CMakeFiles/StereoVisionProject.dir/src/DisparityMapGenerator.cpp.o" \
+"CMakeFiles/StereoVisionProject.dir/src/CameraCalibrator.cpp.o"
 
 # External object files for target StereoVisionProject
 StereoVisionProject_EXTERNAL_OBJECTS =
 
 StereoVisionProject: CMakeFiles/StereoVisionProject.dir/src/main.cpp.o
+StereoVisionProject: CMakeFiles/StereoVisionProject.dir/src/DisparityMapGenerator.cpp.o
+StereoVisionProject: CMakeFiles/StereoVisionProject.dir/src/CameraCalibrator.cpp.o
 StereoVisionProject: CMakeFiles/StereoVisionProject.dir/build.make
 StereoVisionProject: /usr/lib/x86_64-linux-gnu/libopencv_stitching.so.4.6.0
 StereoVisionProject: /usr/lib/x86_64-linux-gnu/libopencv_alphamat.so.4.6.0
@@ -148,7 +180,7 @@ StereoVisionProject: /usr/lib/x86_64-linux-gnu/libopencv_photo.so.4.6.0
 StereoVisionProject: /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.4.6.0
 StereoVisionProject: /usr/lib/x86_64-linux-gnu/libopencv_core.so.4.6.0
 StereoVisionProject: CMakeFiles/StereoVisionProject.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/geo/ros2_ws/CV_projects/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable StereoVisionProject"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/geo/ros2_ws/CV_projects/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable StereoVisionProject"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/StereoVisionProject.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
