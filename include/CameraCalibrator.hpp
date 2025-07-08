@@ -4,6 +4,7 @@
 #include <format>
 #include <iostream>
 #include <opencv2/core.hpp>
+#include <opencv2/core/types.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <stdexcept>
@@ -23,40 +24,20 @@ struct CameraCalibrationData {
 
 class CameraCalibrator {
 public:
-  CameraCalibrator(std::string dirpath,
-                   const std::vector<cv::Point2i> &boardSize, float squareSize);
-
+  CameraCalibrator(std::string dirpath, cv::Point2i board_size,
+                   float square_size);
   auto createImagesStringVector() -> std::vector<std::string>;
+  auto calculateChessboardCorners() -> void;
   auto performCalibration() -> CameraCalibrationData;
+  auto writeCalibrationToFile(std::string_view out_path,
+                              std::string_view name) -> void;
   auto calculateReprojectionError() -> float;
 
 private:
   std::string m_dirpath;
-  int m_chessBoardFlags;
-  std::vector<int> m_boardSize;
-  // methods:
+  const cv::Point2i m_board_size;
+  const float m_square_size;
+  std::vector<cv::Point3f> m_corners;
 };
 
-/**
- * @brief Generates a vector of formatted filenames based on a pattern.
- *
- * This function creates filenames by iterating through two numerical ranges,
- * formatting the numbers with leading zeros, and inserting them into a
- * user-defined string pattern.
- *
- * Example Pattern: "prefix_{}_separator_{}_suffix"
- *
- * @param prefix The constant string part before the first number (e.g.,
- * "chessimage").
- * @param max_num The upper limit (inclusive) for the first number (XXX).
- * @param num_padding The total number of digits for the first number, padded
- * with zeros (e.g., 3 for XXX).
- * @param separator The constant string part between the two numbers (e.g.,
- * "_set").
- * @param max_set The upper limit (inclusive) for the second number (YYY).
- * @param set_padding The total number of digits for the second number, padded
- * with zeros (e.g., 3 for YYY).
- * @param suffix The file extension or trailing part of the name (e.g., ".png").
- * @return A std::vector<std::string> containing all the generated filenames.
- */
 #endif // CAMERACALIBRATOR_HPP

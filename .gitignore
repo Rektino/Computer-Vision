@@ -3,4 +3,6 @@ build
 .git
 Notes.txt
 compile_commands.json
+.cache
+.idea
 

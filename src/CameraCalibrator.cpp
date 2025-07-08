@@ -7,18 +7,43 @@
 
 // The constructor definition with the member initializer list
 
-CameraCalibrator::CameraCalibrator(std::string dirpath,
-                                   const std::vector<cv::Point2i> &boardSize,
+CameraCalibrator::CameraCalibrator(std::string dirpath, cv::Point2i board_size,
                                    float squareSize)
-    : m_dirpath(dirpath) { // <-- This initializer list fixes the issue
+    : m_dirpath(dirpath), m_board_size(board_size), m_square_size(squareSize) {}
 
-  // The rest of your constructor logic goes here.
-  // Note: You will also need to initialize your other members like m_boardSize.
+auto CameraCalibrator::calculateChessboardCorners() -> void {
+  for (int i = 0; i < m_board_size.x; ++i) {
+    for (int j = 0; j < m_board_size.y; ++j) {
+      m_corners.emplace_back(i * m_square_size, j * m_square_size, 0);
+      std::cout << "New corner at : " << i * m_square_size << ","
+                << j * m_square_size << "," << 0 << std::endl;
+    }
+  }
 }
 
-// ... your other function implementations ...
-//
-
+/**
+ * @brief Generates a vector of formatted filenames based on a pattern.
+ *
+ * This function creates filenames by iterating through two numerical ranges,
+ * formatting the numbers with leading zeros, and inserting them into a
+ * user-defined string pattern.
+ *
+ * Example Pattern: "prefix_{}_separator_{}_suffix"
+ *
+ * @param prefix The constant string part before the first number (e.g.,
+ * "chessimage").
+ * @param max_num The upper limit (inclusive) for the first number (XXX).
+ * @param num_padding The total number of digits for the first number, padded
+ * with zeros (e.g., 3 for XXX).
+ * @param separator The constant string part between the two numbers (e.g.,
+ * "_set").
+ * @param max_set The upper limit (inclusive) for the second number (YYY).
+ * @param set_padding The total number of digits for the second number, padded
+ * with zeros (e.g., 3 for YYY).
+ * @param suffix The file extension or trailing part of the name (e.g.,
+ * ".png").
+ * @return A std::vector<std::string> containing all the generated filenames.
+ */
 std::vector<std::string>
 generateFilenames(const std::string &prefix, int start_num, int max_num,
                   int num_padding, const std::string &separator, int start_set,
@@ -30,12 +55,6 @@ generateFilenames(const std::string &prefix, int start_num, int max_num,
   std::vector<std::string> filenames;
   // Reserve memory in advance to avoid reallocations, improving performance.
   filenames.reserve(static_cast<size_t>(max_num + 1) * (max_set + 1));
-
-  // Create the format string once before the loops.
-  // e.g., "chessimage{:03}_set{:03}.png"
-  //  const std::string format_pattern =
-  //     std::format("{}{{:{:0{}}}}{}{{:{:0{}}}}{}", prefix, "d", num_padding,
-  //                separator, "d", set_padding, suffix);
 
   // Iterate through all possible numbers for the first part (XXX)
   for (int i = start_num; i <= max_num; ++i) {

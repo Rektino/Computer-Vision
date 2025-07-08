@@ -10,5 +10,10 @@ int main(int argc, char **argv) {
   for (auto &file : filenamesForCalibration) {
     std::cout << file << std::endl;
   }
+
+  CameraCalibrator calib{"images/", cv::Point2i{8, 6}, 4.0};
+
+  calib.calculateChessboardCorners();
+
   return 0;
 }
