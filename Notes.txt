@@ -12,3 +12,18 @@ drawChessboardCorners( view, cv::Size(s.boardSize.width-1, s.boardSize.height-1)
 rms = calibrateCameraRO(objectPoints, imagePoints, imageSize, iFixedPoint,
                                 cameraMatrix, distCoeffs, rvecs, tvecs, newObjPoints,
                                 s.flag | CALIB_USE_LU);
+
+
+
+double cv::calibrateCamera	(	InputArrayOfArrays	objectPoints,
+InputArrayOfArrays	imagePoints,
+Size	imageSize,
+InputOutputArray	cameraMatrix,
+InputOutputArray	distCoeffs,
+OutputArrayOfArrays	rvecs,
+OutputArrayOfArrays	tvecs,
+OutputArray	stdDeviationsIntrinsics,
+OutputArray	stdDeviationsExtrinsics,
+OutputArray	perViewErrors,
+int	flags = 0,
+TermCriteria	criteria = TermCriteria(TermCriteria::COUNT+TermCriteria::EPS, 30, DBL_EPSILON) )

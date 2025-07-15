@@ -1,10 +1,10 @@
 
 #include "CameraCalibrator.hpp"
 #include <iostream>
-#include <opencv2/core.hpp>
-#include <opencv2/highgui.hpp>
-#include <opencv2/imgcodecs.hpp>
+#include <opencv2/calib3d.hpp>
+#include <opencv2/imgproc.hpp>
 
+using namespace cv;
 // The constructor definition with the member initializer list
 
 CameraCalibrator::CameraCalibrator(std::string dirpath, cv::Point2i board_size,
@@ -14,11 +14,55 @@ CameraCalibrator::CameraCalibrator(std::string dirpath, cv::Point2i board_size,
 auto CameraCalibrator::calculateChessboardCorners() -> void {
   for (int i = 0; i < m_board_size.x; ++i) {
     for (int j = 0; j < m_board_size.y; ++j) {
-      m_corners.emplace_back(i * m_square_size, j * m_square_size, 0);
+      m_object_points[0].emplace_back(i * m_square_size, j * m_square_size, 0);
       std::cout << "New corner at : " << i * m_square_size << ","
                 << j * m_square_size << "," << 0 << std::endl;
     }
   }
+}
+
+auto CameraCalibrator::performCalibration() -> CameraCalibrationData {
+  std::vector<Mat> rvecs, tvecs;
+  Size2i image_size;
+  Mat intrinsic_matrix;
+  Mat distCoeffs;
+  int flags = 0;
+  cv::TermCriteria criteria = cv::TermCriteria(
+      cv::TermCriteria::COUNT + cv::TermCriteria::EPS, 100, 1e-6);
+  //  m_image_points.reserve(image_filenames.size());
+  cv::Mat view, viewGray; // current image
+  std::vector<Point2f> points_temp_buffer;
+  std::vector<std::string> image_filenames =
+      generateFilenames("cam", 0, 0, 1, "_image", 1500, 1600, 4, ".bmp");
+
+  for (int i = 0; i < image_filenames.size(); ++i) {
+    view = cv::imread(image_filenames[i], cv::IMREAD_COLOR);
+    image_size = view.size();
+    cvtColor(view, viewGray, COLOR_BGR2GRAY);
+    bool found =
+        cv::findChessboardCorners(view, m_board_size, points_temp_buffer);
+    if (!found) {
+      std::cerr << "Failed to find chessboard corners on iteration : " << i
+                << std::endl;
+    }
+    cornerSubPix(
+        viewGray, points_temp_buffer, m_board_size, Size(-1, -1),
+        TermCriteria(TermCriteria::EPS + TermCriteria::COUNT, 30, 0.0001));
+    m_image_points.push_back(points_temp_buffer);
+  }
+
+  // convert the vector of points to Mat :
+  auto points = Mat(points_temp_buffer);
+  drawChessboardCorners(view, m_board_size, points, found);
+  // Perform calibration :
+  float rms_reproj_error = calibrateCamera(
+      m_object_points, m_image_points, image_size, intrinsic_matrix, distCoeffs,
+      rvecs, tvecs, flags, criteria);
+  // 7. Print results
+  std::cout << "\n--- Camera Calibration Results ---" << std::endl;
+  std::cout << "RMS Re-projection Error: " << rms_reproj_error << std::endl;
+  std::cout << "\nCamera Matrix:\n" << intrinsic_matrix << std::endl;
+  std::cout << "\nDistortion Coefficients:\n" << distCoeffs << std::endl;
 }
 
 /**
@@ -44,17 +88,18 @@ auto CameraCalibrator::calculateChessboardCorners() -> void {
  * ".png").
  * @return A std::vector<std::string> containing all the generated filenames.
  */
-std::vector<std::string>
-generateFilenames(const std::string &prefix, int start_num, int max_num,
-                  int num_padding, const std::string &separator, int start_set,
-                  int max_set, int set_padding, const std::string &suffix) {
+std::vector<std::string> CameraCalibrator::generateFilenames(
+    const std::string &prefix, int start_num, int max_num, int num_padding,
+    const std::string &separator, int start_set, int max_set, int set_padding,
+    const std::string &suffix) {
   if (max_num < 0 || max_set < 0 || num_padding <= 0 || set_padding <= 0) {
     throw std::invalid_argument("Limits and padding must be non-negative.");
   }
 
   std::vector<std::string> filenames;
   // Reserve memory in advance to avoid reallocations, improving performance.
-  filenames.reserve(static_cast<size_t>(max_num + 1) * (max_set + 1));
+  filenames.reserve(static_cast<size_t>(max_num - start_num + 1) *
+                    (max_set - start_set + 1));
 
   // Iterate through all possible numbers for the first part (XXX)
   for (int i = start_num; i <= max_num; ++i) {
