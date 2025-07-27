@@ -295,5 +295,7 @@ CMakeFiles/StereoVisionProject.dir/src/main.cpp.o: \
  /usr/include/opencv4/opencv2/highgui.hpp \
  /usr/include/opencv4/opencv2/imgcodecs.hpp \
  /usr/include/opencv4/opencv2/videoio.hpp \
+ /usr/include/opencv4/opencv2/imgproc.hpp \
+ /usr/include/opencv4/opencv2/imgproc/segmentation.hpp \
  /home/geo/ros2_ws/CV_projects/include/CameraParameters.hpp \
  /home/geo/ros2_ws/CV_projects/include/DisparityMapGenerator.hpp

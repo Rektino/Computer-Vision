@@ -1,7 +1,7 @@
-
 #include "CameraCalibrator.hpp"
 #include <iostream>
 #include <opencv2/calib3d.hpp>
+#include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
 
 using namespace cv;
@@ -12,9 +12,11 @@ CameraCalibrator::CameraCalibrator(std::string dirpath, cv::Point2i board_size,
     : m_dirpath(dirpath), m_board_size(board_size), m_square_size(squareSize) {}
 
 auto CameraCalibrator::calculateChessboardCorners() -> void {
+  m_object_points.resize(1);
   for (int i = 0; i < m_board_size.x; ++i) {
     for (int j = 0; j < m_board_size.y; ++j) {
-      m_object_points[0].emplace_back(i * m_square_size, j * m_square_size, 0);
+      m_object_points.at(0).emplace_back(i * m_square_size, j * m_square_size,
+                                         0);
       std::cout << "New corner at : " << i * m_square_size << ","
                 << j * m_square_size << "," << 0 << std::endl;
     }
@@ -27,33 +29,42 @@ auto CameraCalibrator::performCalibration() -> CameraCalibrationData {
   Mat intrinsic_matrix;
   Mat distCoeffs;
   int flags = 0;
+  bool found;
   cv::TermCriteria criteria = cv::TermCriteria(
       cv::TermCriteria::COUNT + cv::TermCriteria::EPS, 100, 1e-6);
   //  m_image_points.reserve(image_filenames.size());
   cv::Mat view, viewGray; // current image
   std::vector<Point2f> points_temp_buffer;
   std::vector<std::string> image_filenames =
-      generateFilenames("cam", 0, 0, 1, "_image", 1500, 1600, 4, ".bmp");
+      generateFilenames("cam", 0, 0, 1, "_image", 28, 492, 5, ".bmp");
 
   for (int i = 0; i < image_filenames.size(); ++i) {
-    view = cv::imread(image_filenames[i], cv::IMREAD_COLOR);
+    auto image_path = image_filenames[i];
+    view = cv::imread(image_path, cv::IMREAD_COLOR);
+    if (view.empty()) {
+      std::cerr << "Failed to open image from filename" << "\n";
+    }
     image_size = view.size();
     cvtColor(view, viewGray, COLOR_BGR2GRAY);
-    bool found =
-        cv::findChessboardCorners(view, m_board_size, points_temp_buffer);
+    found = cv::findChessboardCorners(
+        viewGray, m_board_size, points_temp_buffer,
+        CALIB_CB_ADAPTIVE_THRESH | CALIB_CB_FAST_CHECK |
+            CALIB_CB_NORMALIZE_IMAGE);
     if (!found) {
-      std::cerr << "Failed to find chessboard corners on iteration : " << i
+      std::cout << "Failed to find chessboard corners on image : " << image_path
                 << std::endl;
+    } else {
+      cornerSubPix(
+          viewGray, points_temp_buffer, m_board_size, Size(-1, -1),
+          TermCriteria(TermCriteria::EPS + TermCriteria::COUNT, 30, 0.0001));
+      m_image_points.push_back(points_temp_buffer);
+      drawChessboardCorners(view, m_board_size, Mat(points_temp_buffer), found);
+      cv::imshow("corners drawn", view);
     }
-    cornerSubPix(
-        viewGray, points_temp_buffer, m_board_size, Size(-1, -1),
-        TermCriteria(TermCriteria::EPS + TermCriteria::COUNT, 30, 0.0001));
-    m_image_points.push_back(points_temp_buffer);
   }
-
-  // convert the vector of points to Mat :
-  auto points = Mat(points_temp_buffer);
-  drawChessboardCorners(view, m_board_size, points, found);
+  // now we need to make the object points match the size of the image points
+  // and populate it with the one element.
+  m_object_points.resize(m_image_points.size(), m_object_points.at(0));
   // Perform calibration :
   float rms_reproj_error = calibrateCamera(
       m_object_points, m_image_points, image_size, intrinsic_matrix, distCoeffs,
@@ -63,6 +74,7 @@ auto CameraCalibrator::performCalibration() -> CameraCalibrationData {
   std::cout << "RMS Re-projection Error: " << rms_reproj_error << std::endl;
   std::cout << "\nCamera Matrix:\n" << intrinsic_matrix << std::endl;
   std::cout << "\nDistortion Coefficients:\n" << distCoeffs << std::endl;
+  return CameraCalibrationData(intrinsic_matrix, distCoeffs);
 }
 
 /**
@@ -111,9 +123,9 @@ std::vector<std::string> CameraCalibrator::generateFilenames(
       // 0   - Pad with leading zeros
       // 3   - Total width of the number
       // d   - (optional) format as decimal integer
-      filenames.push_back(std::format("{}{:0{}}{}{:0{}}{}", prefix, i,
-                                      num_padding, separator, j, set_padding,
-                                      suffix));
+      filenames.push_back(m_dirpath + std::format("{}{:0{}}{}{:0{}}{}", prefix,
+                                                  i, num_padding, separator, j,
+                                                  set_padding, suffix));
     }
   }
   return filenames;

@@ -233,6 +233,8 @@ CMakeFiles/StereoVisionProject.dir/src/CameraCalibrator.cpp.o: /home/geo/ros2_ws
   /usr/include/opencv4/opencv2/flann/miniflann.hpp \
   /usr/include/opencv4/opencv2/highgui.hpp \
   /usr/include/opencv4/opencv2/imgcodecs.hpp \
+  /usr/include/opencv4/opencv2/imgproc.hpp \
+  /usr/include/opencv4/opencv2/imgproc/segmentation.hpp \
   /usr/include/opencv4/opencv2/opencv_modules.hpp \
   /usr/include/opencv4/opencv2/videoio.hpp \
   /usr/include/pthread.h \
@@ -943,6 +945,8 @@ CMakeFiles/StereoVisionProject.dir/src/main.cpp.o: /home/geo/ros2_ws/CV_projects
   /usr/include/opencv4/opencv2/flann/miniflann.hpp \
   /usr/include/opencv4/opencv2/highgui.hpp \
   /usr/include/opencv4/opencv2/imgcodecs.hpp \
+  /usr/include/opencv4/opencv2/imgproc.hpp \
+  /usr/include/opencv4/opencv2/imgproc/segmentation.hpp \
   /usr/include/opencv4/opencv2/opencv_modules.hpp \
   /usr/include/opencv4/opencv2/videoio.hpp \
   /usr/include/pthread.h \
@@ -1217,6 +1221,10 @@ CMakeFiles/StereoVisionProject.dir/src/main.cpp.o: /home/geo/ros2_ws/CV_projects
 
 /usr/include/x86_64-linux-gnu/bits/floatn.h:
 
+/usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h:
+
+/usr/include/x86_64-linux-gnu/bits/environments.h:
+
 /usr/include/c++/13/cstdio:
 
 /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
@@ -1351,6 +1359,10 @@ CMakeFiles/StereoVisionProject.dir/src/main.cpp.o: /home/geo/ros2_ws/CV_projects
 
 /usr/include/c++/13/bits/move.h:
 
+/usr/include/x86_64-linux-gnu/bits/endianness.h:
+
+/usr/include/c++/13/bits/chrono.h:
+
 /usr/include/opencv4/opencv2/calib3d.hpp:
 
 /usr/include/x86_64-linux-gnu/gnu/stubs.h:
@@ -1376,10 +1388,6 @@ CMakeFiles/StereoVisionProject.dir/src/main.cpp.o: /home/geo/ros2_ws/CV_projects
 /usr/include/c++/13/tr1/poly_laguerre.tcc:
 
 /usr/include/libintl.h:
-
-/usr/include/c++/13/bits/chrono.h:
-
-/usr/include/x86_64-linux-gnu/bits/endianness.h:
 
 /usr/include/c++/13/optional:
 
@@ -1534,10 +1542,6 @@ CMakeFiles/StereoVisionProject.dir/src/main.cpp.o: /home/geo/ros2_ws/CV_projects
 /usr/include/c++/13/bits/ranges_algo.h:
 
 /usr/include/c++/13/bits/invoke.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h:
-
-/usr/include/x86_64-linux-gnu/bits/environments.h:
 
 /usr/include/c++/13/streambuf:
 
@@ -1781,11 +1785,15 @@ CMakeFiles/StereoVisionProject.dir/src/main.cpp.o: /home/geo/ros2_ws/CV_projects
 
 /usr/include/string.h:
 
+/usr/include/opencv4/opencv2/imgproc.hpp:
+
 /usr/include/opencv4/opencv2/flann/config.h:
 
 /usr/include/c++/13/bits/ranges_uninitialized.h:
 
 /usr/include/opencv4/opencv2/flann/defines.h:
+
+/usr/include/opencv4/opencv2/imgproc/segmentation.hpp:
 
 /usr/include/opencv4/opencv2/videoio.hpp:
 
