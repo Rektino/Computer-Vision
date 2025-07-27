@@ -2,6 +2,7 @@
 #include <iostream>
 #include <opencv2/calib3d.hpp>
 #include <opencv2/highgui.hpp>
+#include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc.hpp>
 
 using namespace cv;
@@ -33,19 +34,18 @@ auto CameraCalibrator::performCalibration() -> CameraCalibrationData {
   cv::TermCriteria criteria = cv::TermCriteria(
       cv::TermCriteria::COUNT + cv::TermCriteria::EPS, 100, 1e-6);
   //  m_image_points.reserve(image_filenames.size());
-  cv::Mat view, viewGray; // current image
+  cv::Mat viewGray; // current image
   std::vector<Point2f> points_temp_buffer;
   std::vector<std::string> image_filenames =
       generateFilenames("cam", 0, 0, 1, "_image", 28, 492, 5, ".bmp");
 
   for (int i = 0; i < image_filenames.size(); ++i) {
     auto image_path = image_filenames[i];
-    view = cv::imread(image_path, cv::IMREAD_COLOR);
-    if (view.empty()) {
+    viewGray = cv::imread(image_path, cv::IMREAD_GRAYSCALE);
+    if (viewGray.empty()) {
       std::cerr << "Failed to open image from filename" << "\n";
     }
-    image_size = view.size();
-    cvtColor(view, viewGray, COLOR_BGR2GRAY);
+    image_size = viewGray.size();
     found = cv::findChessboardCorners(
         viewGray, m_board_size, points_temp_buffer,
         CALIB_CB_ADAPTIVE_THRESH | CALIB_CB_FAST_CHECK |
@@ -58,8 +58,10 @@ auto CameraCalibrator::performCalibration() -> CameraCalibrationData {
           viewGray, points_temp_buffer, m_board_size, Size(-1, -1),
           TermCriteria(TermCriteria::EPS + TermCriteria::COUNT, 30, 0.0001));
       m_image_points.push_back(points_temp_buffer);
-      drawChessboardCorners(view, m_board_size, Mat(points_temp_buffer), found);
-      cv::imshow("corners drawn", view);
+      drawChessboardCorners(viewGray, m_board_size, Mat(points_temp_buffer),
+                            found);
+      cv::imshow("corners drawn", viewGray);
+      cv::waitKey(100);
     }
   }
   // now we need to make the object points match the size of the image points
